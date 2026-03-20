@@ -12,6 +12,7 @@ This branch adds an OpenClaw-oriented adaptation layer for selected PUA skills.
 ## Included in this branch
 
 ### Adapted for OpenClaw
+- `skills/pua`
 - `skills/p7`
 - `skills/p9`
 - `skills/p10`
