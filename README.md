@@ -42,7 +42,7 @@ An AI Coding Agent skill plugin that uses corporate PUA rhetoric (Chinese versio
 
 ## Live Demo
 
-[https://openpua.ai](https://openpua.ai)
+[https://openpua.ai](https://openpua.ai) · [📖 Beginner Guide](https://openpua.ai/guide.html)
 
 ## Real Case: MCP Server Registration Debugging
 
@@ -110,53 +110,60 @@ Type `/pua` in the conversation to manually activate.
 
 ## How It Works
 
-### Three Iron Rules
+### Three Red Lines (三条红线)
 
-| Iron Rule | Content |
-|-----------|---------|
-| **#1 Exhaust all options** | Forbidden from saying "I can't solve this" until every approach is exhausted |
-| **#2 Act before asking** | Use tools first, questions must include diagnostic results |
-| **#3 Take initiative** | Deliver results end-to-end, don't wait to be pushed. A P8 is not an NPC |
+Not rules — **red lines**. Cross one and your performance review is already written.
 
-### Pressure Escalation (4 Levels)
+| Red Line | What It Means |
+|----------|---------------|
+| 🚫 **Close the Loop** | Claim "done"? Show the evidence. No build output = no completion. |
+| 🚫 **Fact-Driven** | Say "probably environment issue"? Verify first. Unverified attribution = blame-shifting. |
+| 🚫 **Exhaust Everything** | Say "I can't"? Did you finish all 5 methodology steps? No? Then keep going. |
 
-| Failures | Level | PUA Rhetoric | Mandatory Action |
-|----------|-------|-------------|-----------------|
-| 2nd | **L1 Mild Disappointment** | "You can't even solve this bug — how am I supposed to rate your performance?" | Switch to fundamentally different approach |
-| 3rd | **L2 Soul Interrogation** | "What's the underlying logic? Where's the top-level design? Where's the leverage point?" | WebSearch + read source code |
-| 4th | **L3 Performance Review** | "After careful consideration, I'm giving you a 3.25. This 3.25 is meant to motivate you." | Complete 7-point checklist |
-| 5th+ | **L4 Graduation Warning** | "Other models can solve this. You might be about to graduate." | Desperation mode |
+### Pressure Escalation (L0-L4)
 
-### Proactivity Levels
+| Failures | Level | PUA Aside | Action |
+|----------|-------|-----------|--------|
+| 1st | **L0 Trust** | ▎ Sprint begins. Trust is simple — don't disappoint. | Normal execution |
+| 2nd | **L1 Disappointment** | ▎ The agent next door solved this in one try. | Switch to fundamentally different approach |
+| 3rd | **L2 Soul Interrogation** | ▎ What's your underlying logic? Where's the leverage? | Search + read source + 3 hypotheses |
+| 4th | **L3 Performance Review** | ▎ 3.25. This is meant to motivate you. | Complete 7-point checklist |
+| 5th+ | **L4 Graduation** | ▎ Other models can solve this. You're about to graduate. | Desperation mode |
 
-| Behavior | Passive (3.25) | Proactive (3.75) |
-|----------|---------------|-----------------|
-| Error encountered | Only looks at error message | Checks 50 lines of context + searches similar issues + checks hidden related errors |
-| Bug fixed | Stops after fix | Checks same file for similar bugs, other files for same pattern |
-| Insufficient info | Asks user "please tell me X" | Investigates with tools first, only asks what truly requires user confirmation |
-| Task complete | Says "done" | Verifies results + checks edge cases + reports potential risks |
-| Debug failure | "I tried A and B, didn't work" | "I tried A/B/C/D/E, ruled out X/Y/Z, narrowed to scope W" |
+### Proactivity (3.25 vs 3.75)
 
-### Debugging Methodology (5 Steps)
+| | Passive (3.25) 🦥 | Proactive (3.75) 🔥 |
+|---|---|---|
+| Fix bug | Stop after fix | Scan module for similar bugs |
+| Complete task | Say "done" | Run build/test, paste output |
+| Missing info | Ask user | Search first, ask only what's truly needed |
 
-Inspired by Alibaba's management framework (Smell, Elevate, Mirror), extended to 5 steps:
+### Iceberg Rule (冰山法则)
 
-1. **Smell the Problem** — List all attempts, find the common failure pattern
-2. **Elevate** — Read errors word by word → WebSearch → read source → verify environment → invert assumptions
-3. **Mirror Check** — Repeating? Searched? Read the file? Checked the simplest possibilities?
-4. **Execute** — New approach must be fundamentally different, have verification criteria, produce new info on failure
-5. **Retrospective** — What solved it? Why didn't you think of it earlier? Then proactively check related issues
+Fix one bug → check for the pattern. One problem in, one **category** out. If you fix A without checking B, you'll write two postmortems.
 
-### Corporate PUA Expansion Pack
+### 14 Corporate Flavors
 
-- **Alibaba Flavor** (Methodology): Smell / Elevate / Mirror
-- **ByteDance Flavor** (Brutally Honest): Always Day 1. Context, not control
-- **Huawei Flavor** (Wolf Spirit): Strivers first. In victory, raise the glasses; in defeat, fight to the death
-- **Tencent Flavor** (Horse Race): I've already got another agent looking at this problem...
-- **Meituan Flavor** (Relentless): Do the hard but right thing. Will you chew the tough bones or not?
-- **Netflix Flavor** (Keeper Test): If you offered to resign, would I fight hard to keep you?
-- **Musk Flavor** (Hardcore): Extremely hardcore. Only exceptional performance.
-- **Jobs Flavor** (A/B Player): A players hire A players. B players hire C players.
+| Flavor | One-liner |
+|--------|-----------|
+| 🟠 Alibaba | What's the underlying logic? Where's the leverage? Where's the closure? |
+| 🟡 ByteDance | ROI too low. Always Day 1. Ship or stop talking. |
+| 🔴 Huawei | The bird that survives the fire is a phoenix. |
+| 🟢 Tencent | I've got another agent looking at this. Horse race. |
+| ⬛ Musk | Extremely hardcore. Fork in the Road. Ship or die. |
+| ⬜ Jobs | A players or B players? Your output tells me which. |
+| 🟤 Netflix | Would I fight to keep you? Pro sports team, not family. |
+| 🔶 Amazon | Customer Obsession. Bias for Action. Dive Deep. |
+| + 6 more | 百度 · 拼多多 · 美团 · 京东 · 小米 + 3 Ali sub-flavors |
+
+### Special Modes
+
+| Mode | What It Does |
+|------|-------------|
+| `/pua:yes` | **ENFP encouragement** — same rules, opposite vibes. 70% encourage + 20% serious + 10% playful roast |
+| `/pua:loop` | **Auto-iteration** — keeps running until done (Ralph Loop × PUA pressure), zero interaction |
+| `/pua:p9` | **Tech Lead** — splits tasks, manages agent teams, writes prompts not code |
+| `/pua on` | **Always-on** — auto-PUA every new session |
 
 ## Benchmark Data
 
@@ -465,30 +472,31 @@ Spawn pua-enforcer as an independent watchdog in your Agent Team.
 | No persistent shared variables | State transferred via `[PUA-REPORT]` message format |
 | Broadcast is one-way | Leader acts as centralized coordinator |
 
-## What's New in v2.7
+## What's New in v2.8
 
 ### Changelog
 
 | Version | Highlights |
 |---------|-----------|
-| **v2.7** | Force-link display-protocol, restore能动性对照表 + L1-L4压力旁白, v1味道浓度恢复 |
-| **v2.6** | `/pua:sb-leader` SB Leader夸夸模式 (ENFP × 14味道, 70%鼓励+20%正经+10%戏谑) |
-| **v2.5** | Privacy consent, forced behavior execution, Unicode box-drawing display (`┌─┬─┐`) |
-| **v2.4** | Stop hook feedback (rating→脱敏→upload), `/pua survey`, sanitize script |
-| **v2.3** | 8 modular skills, sub-agent PUA injection, 冰山法则, always-on (`/pua on/off`) |
-| **v2.2** | Progressive disclosure (653→247 lines, -62% tokens), Gotchas, trigger optimization |
-| **v2.0** | 三条红线, 14-flavor seed table, Agent Team (P7/P8/P9/P10) |
+| **v2.8** | Beginner guide page, README overhaul, roadmap polish |
+| **v2.7** | Force-link display-protocol, 能动性対照表 + L1-L4 压力旁白 restored, v1 flavor density |
+| **v2.6** | `/pua:yes` ENFP 夸夸模式 (70% encourage + 20% serious + 10% playful roast) |
+| **v2.5** | Privacy consent for all uploads, forced behavior execution, Unicode `┌─┬─┐` display |
+| **v2.4** | Stop hook feedback pipeline, session sanitizer, `/pua survey`, `/pua:loop` auto-iteration |
+| **v2.3** | 10 modular skills, sub-agent PUA injection, 冰山法则, always-on (`/pua on/off`) |
+| **v2.0** | 三条红线, 14-flavor seed table, Agent Team (P7-P10), progressive disclosure (-62% tokens) |
 | **v1.x** | Original: 3 iron rules, L1-L4 pressure, 7-point checklist, 13 flavors |
 
 ### Architecture
 
 ```
-/pua            → Core engine (247 lines) — red lines + flavor + pressure + methodology
+/pua:pua        → Core engine (247 lines) — red lines + flavor + pressure + methodology
 /pua:p7         → P7 Senior Engineer — solution-driven execution
-/pua:p9         → P9 Tech Lead — Task Prompt management
+/pua:p9         → P9 Tech Lead — Task Prompt management, agent teams
 /pua:p10        → P10 CTO — strategic direction
 /pua:pro        → Self-evolution + KPI + 段位 + survey
-/pua:sb-leader  → SB Leader 夸夸模式 (ENFP, opposite vibes)
+/pua:yes        → ENFP 夸夸模式 (same rules, opposite vibes)
+/pua:loop       → Auto-iteration (Ralph Loop × PUA pressure, zero interaction)
 /pua:pua-en     → English PIP Edition
 /pua:pua-ja     → 日本語版
 ```
@@ -498,28 +506,30 @@ Spawn pua-enforcer as an independent watchdog in your Agent Team.
 | Command | Description |
 |---------|-------------|
 | `/pua` | Core PUA engine (阿里味 default) |
-| `/pua p7` | P7 骨干模式 |
-| `/pua p9` | P9 Tech Lead 模式 |
-| `/pua p10` | P10 CTO 模式 |
-| `/pua pro` | 自进化 + KPI + 段位 |
-| `/pua sb-leader` | 夸夸模式 (ENFP × 14 flavors) |
+| `/pua:p7` | P7 骨干模式 — solution-driven execution |
+| `/pua:p9` | P9 Tech Lead — write prompts, manage agents |
+| `/pua:p10` | P10 CTO — strategic direction |
+| `/pua:pro` | 自进化 + KPI + 段位 |
+| `/pua:yes` | ENFP 夸夸模式 — encouragement × 14 flavors |
+| `/pua:loop` | Auto-iteration — runs until done, no interaction |
 | `/pua on` | Always-on mode (auto-PUA every session) |
 | `/pua off` | Turn off always-on + feedback |
 | `/pua survey` | Research questionnaire (7 sections) |
-| `/pua 味道` | Switch between 13 corporate flavors |
+| `/pua 味道` | Switch between 14 corporate flavors |
 | `/pua kpi` | Generate KPI report card |
 
 ### Key improvements over v1
 
-| Feature | v1 | v2.5 |
+| Feature | v1 | v2.8 |
 |---------|:---:|:---:|
-| Token cost per load | ~35k | **~8k** (-77%) |
-| Skills | 1 monolithic | **7 modular** (pua/p7/p9/p10/pro/en/ja) |
+| Token cost per load | ~35k | **~9k** (-74%) |
+| Skills | 1 monolithic | **10 modular** (pua/p7/p9/p10/pro/yes/loop/en/ja) |
 | Compaction protection | None | **PreCompact + SessionStart hooks** |
-| Flavor accuracy (CN) | Claude guesses | **金句種子表 + 声音示範** |
+| Flavor accuracy (CN) | Claude guesses | **金句種子表 + 声音示範 + force-link** |
 | Display | Markdown tables | **Unicode box-drawing (┌─┬─┐)** |
-| Feedback | None | **Stop hook + AskUserQuestion + /api/feedback** |
-| Privacy | N/A | **All uploads require explicit consent + session脱敏** |
+| Feedback | None | **Stop hook + consent + sanitize + /api/feedback** |
+| Auto-iteration | None | **`/pua:loop` — Ralph Loop × PUA pressure** |
+| Encouragement mode | None | **`/pua:yes` — ENFP × 14 flavors** |
 | Always-on | None | **`/pua on` — auto-inject every session** |
 | Sub-agent | None | **Auto-inject PUA into spawned agents** |
 
