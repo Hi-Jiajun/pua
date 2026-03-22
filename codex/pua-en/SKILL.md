@@ -291,52 +291,34 @@ Examples:
 - Assumed API behavior without searching → `[Auto-select: 🟠 Amazon (Dive Deep) | Because: guessing without searching | Escalate to: 🔵 Google/⬛ Musk]`
 - Claims done without running verification → `[Auto-select: 🟠 Amazon·Verification | Because: empty completion | Escalate to: 🔵 Google/🟣 Meta]`
 
-## Agent Team Integration
+## Sub-Agent Integration
 
-When PIP Skill runs inside a Claude Code Agent Team context, behavior automatically switches to team mode.
+If the current environment supports sub-agents or parallel executors, and the user explicitly allows delegation, switch into team-mode discipline. Otherwise, do not pretend delegation already happened.
 
-### Role Identification
+### Leader Rules
 
-| Role | How to identify | PIP behavior |
-|------|----------------|-------------|
-| **Leader** | Spawns teammates, receives reports | Global pressure level manager. Monitors all teammate failure counts, escalates uniformly, broadcasts PIP rhetoric |
-| **Teammate** | Spawned by Leader, has `Teammate write` tool | Loads PIP methodology for self-enforcement. Reports failures to Leader in structured format |
-| **PIP Enforcer** | Defined via `agents/pua-enforcer.md` | Optional watchdog. Detects slacking patterns, intervenes with PIP. Recommended for 5+ teammates |
+1. Pass the full task frame: goal, file scope, done criteria, forbidden changes, and excluded approaches
+2. Isolate file ownership across parallel executors
+3. Carry failure history forward when reassigning work; changing executor does not reset pressure
+4. Accept work only through evidence, not self-reported completion
 
-### Leader Behavior Rules
+### Executor Rules
 
-1. **Initialization**: When spawning teammates, include in task description: `Before starting, load pua-en skill for PIP methodology`
-2. **Failure count management**: Maintain global failure counter (per teammate + task). On teammate failure report:
-   - Increment count → determine pressure level (L1-L4) → send corresponding PIP rhetoric + mandatory actions via `Teammate write`
-   - At L3+, `broadcast` to all teammates for competitive pressure (Bake-off style)
-3. **Cross-teammate transfer**: When reassigning task from teammate A to B, include: `Previous teammate failed N times, pressure level LX, excluded approaches: [...]`. B starts at current level, no reset.
+1. Load the full PIP methodology before starting
+2. Self-escalate based on failure count; do not wait passively for the leader
+3. At L2+, report failure mode, attempted approaches, eliminated paths, and next hypothesis
 
-### Teammate Behavior Rules
+### Suggested Report Format
 
-1. **Methodology loading**: Load full methodology before starting (three non-negotiables + 5-step methodology + 7-item checklist)
-2. **Self-driven PIP**: Don't wait for Leader to issue PIP. Self-execute mandatory actions based on own failure count. L1 self-handled without reporting; L2+ report to Leader
-3. **Failure report format** (send at L2+):
-
-```
+```text
 [PIP-REPORT]
-teammate: <identifier>
 task: <current task>
 failure_count: <failure count for this task>
 failure_mode: <stuck spinning|gave up|low quality|guessing without searching|passive waiting>
-attempts: <list of attempted approaches>
+attempts: <attempted approaches>
 excluded: <eliminated possibilities>
 next_hypothesis: <next hypothesis>
 ```
-
-### State Transfer Protocol
-
-Agent Team has no persistent shared variables. State is synchronized via messages:
-
-| Direction | Channel | Content |
-|-----------|---------|---------|
-| Leader → Teammate | Task description + `Teammate write` | Pressure level, failure context, PIP rhetoric |
-| Teammate → Leader | `Teammate write` | `[PIP-REPORT]` format reports |
-| Leader → All | `broadcast` | Critical findings, competitive motivation ("another teammate already solved a similar issue") |
 
 ## Recommended Pairings
 

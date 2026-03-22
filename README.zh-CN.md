@@ -218,6 +218,10 @@ git clone https://github.com/tanweai/pua.git ~/.claude/plugins/pua
 
 Codex CLI 使用相同的 Agent Skills 开放标准（SKILL.md）。Codex 版本使用精简的 description 以兼容 Codex 的长度限制：
 
+当前 Codex 适配层支持：`pua`、`p7`、`p9`、`p10`、`pro`、`yes`、`pua-en`、`pua-ja`。
+
+当前 **不支持**：`loop` / `pua:loop`，因为它依赖 Claude 专属 hooks 和 `.claude` 状态文件。
+
 **推荐：一键安装（git clone + symlink，支持 `git pull` 更新）**
 
 让 Codex 执行：
@@ -227,6 +231,8 @@ Fetch and follow instructions from https://raw.githubusercontent.com/tanweai/pua
 
 **手动安装：**
 
+下面这段是**最小安装**（核心 `pua` + Codex prompt router）。如果你要完整安装全部 Codex skill，请以 `.codex/INSTALL.md` 为准。
+
 ```bash
 mkdir -p ~/.codex/skills/pua
 curl -o ~/.codex/skills/pua/SKILL.md \
@@ -234,7 +240,7 @@ curl -o ~/.codex/skills/pua/SKILL.md \
 
 mkdir -p ~/.codex/prompts
 curl -o ~/.codex/prompts/pua.md \
-  https://raw.githubusercontent.com/tanweai/pua/main/commands/pua.md
+  https://raw.githubusercontent.com/tanweai/pua/main/codex/prompts/pua.md
 ```
 
 **触发方式：**
@@ -242,10 +248,12 @@ curl -o ~/.codex/prompts/pua.md \
 | 方式 | 命令 | 需要 |
 |------|------|------|
 | 自动触发 | 无需操作，根据 description 匹配 | SKILL.md |
-| 直接调用 | 对话中输入 `$pua` | SKILL.md |
-| 手动 prompt | 对话中输入 `/prompts:pua` | SKILL.md + prompts/pua.md |
+| 直接调用 | 对话中输入 `$pua` / `$p7` / `$p9` / `$p10` / `$pro` / `$yes` | SKILL.md |
+| 手动 prompt | 对话中输入 `/prompts:pua` 或 `/prompts:pua p9` | SKILL.md + prompts/pua.md |
 
 项目级安装（仅当前项目生效）：
+
+下面这段同样是最小安装；完整多 skill 安装请参考 `.codex/INSTALL.md`。
 
 ```bash
 mkdir -p .agents/skills/pua
@@ -254,7 +262,7 @@ curl -o .agents/skills/pua/SKILL.md \
 
 mkdir -p .agents/prompts
 curl -o .agents/prompts/pua.md \
-  https://raw.githubusercontent.com/tanweai/pua/main/commands/pua.md
+  https://raw.githubusercontent.com/tanweai/pua/main/codex/prompts/pua.md
 ```
 
 ### Cursor

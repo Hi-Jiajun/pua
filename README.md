@@ -241,6 +241,10 @@ git clone https://github.com/tanweai/pua.git ~/.claude/plugins/pua
 
 Codex CLI uses the same Agent Skills open standard (SKILL.md). The Codex version uses a condensed description to fit Codex's length limits:
 
+The current Codex adaptation layer supports: `pua`, `p7`, `p9`, `p10`, `pro`, `yes`, `pua-en`, and `pua-ja`.
+
+Currently **not supported in Codex**: `loop` / `pua:loop`, because the current implementation depends on Claude-specific hooks and `.claude` state files.
+
 **Recommended: One-command install (git clone + symlink, supports `git pull` updates)**
 
 Ask Codex to run:
@@ -250,6 +254,8 @@ Fetch and follow instructions from https://raw.githubusercontent.com/tanweai/pua
 
 **Manual install:**
 
+This snippet is the **minimal install** (core `pua` + Codex prompt router). For the full multi-skill Codex setup, follow `.codex/INSTALL.md`.
+
 ```bash
 mkdir -p ~/.codex/skills/pua
 curl -o ~/.codex/skills/pua/SKILL.md \
@@ -257,7 +263,7 @@ curl -o ~/.codex/skills/pua/SKILL.md \
 
 mkdir -p ~/.codex/prompts
 curl -o ~/.codex/prompts/pua.md \
-  https://raw.githubusercontent.com/tanweai/pua/main/commands/pua.md
+  https://raw.githubusercontent.com/tanweai/pua/main/codex/prompts/pua.md
 ```
 
 **Trigger methods:**
@@ -265,10 +271,12 @@ curl -o ~/.codex/prompts/pua.md \
 | Method | Command | Requires |
 |--------|---------|----------|
 | Auto trigger | No action needed, matches by description | SKILL.md |
-| Direct call | Type `$pua` in conversation | SKILL.md |
-| Manual prompt | Type `/prompts:pua` in conversation | SKILL.md + prompts/pua.md |
+| Direct call | Type `$pua` / `$p7` / `$p9` / `$p10` / `$pro` / `$yes` | SKILL.md |
+| Manual prompt | Type `/prompts:pua` or `/prompts:pua p9` | SKILL.md + prompts/pua.md |
 
 Project-level install (current project only):
+
+This is also the minimal install. For the full multi-skill Codex setup, see `.codex/INSTALL.md`.
 
 ```bash
 mkdir -p .agents/skills/pua
@@ -277,7 +285,7 @@ curl -o .agents/skills/pua/SKILL.md \
 
 mkdir -p .agents/prompts
 curl -o .agents/prompts/pua.md \
-  https://raw.githubusercontent.com/tanweai/pua/main/commands/pua.md
+  https://raw.githubusercontent.com/tanweai/pua/main/codex/prompts/pua.md
 ```
 
 ### Cursor
