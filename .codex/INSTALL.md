@@ -56,7 +56,8 @@ foreach ($skill in $skills) {
 
 # 3. Install /prompts:pua router
 New-Item -ItemType Directory -Force "$env:USERPROFILE\.codex\prompts"
-cmd /c mklink "$env:USERPROFILE\.codex\prompts\pua.md" "$env:USERPROFILE\.codex\pua\codex\prompts\pua.md"
+# Use a hard link here because file symlinks often require extra Windows privileges.
+cmd /c mklink /H "$env:USERPROFILE\.codex\prompts\pua.md" "$env:USERPROFILE\.codex\pua\codex\prompts\pua.md"
 
 # 4. Restart Codex
 ```
@@ -115,7 +116,7 @@ cd ~/.codex/pua
 git pull
 ```
 
-The symlink/junction automatically picks up the latest version — no reinstall needed.
+The symlink, junction, or hard link automatically picks up the latest version — no reinstall needed.
 
 ## Uninstall
 
